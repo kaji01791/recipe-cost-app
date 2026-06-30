@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 
@@ -121,12 +122,21 @@ export default function RecipesPage() {
                   <td className="p-3">{recipe.name}</td>
                   <td className="p-3 text-right">{recipe.yield_count}個</td>
                   <td className="p-3 text-center">
-                    <button
-                      onClick={() => deleteRecipe(recipe.id)}
-                      className="rounded bg-red-600 px-3 py-1 text-white"
-                    >
-                      削除
-                    </button>
+                    <div className="flex justify-center gap-2">
+                      <Link
+                        href={`/recipes/${recipe.id}`}
+                        className="rounded bg-green-600 px-3 py-1 text-white"
+                      >
+                        配合
+                      </Link>
+
+                      <button
+                        onClick={() => deleteRecipe(recipe.id)}
+                        className="rounded bg-red-600 px-3 py-1 text-white"
+                      >
+                        削除
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
