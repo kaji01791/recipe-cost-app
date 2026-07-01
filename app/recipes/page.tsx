@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { supabase } from "../../lib/supabase";
 
 type Recipe = {
@@ -119,24 +119,22 @@ export default function RecipesPage() {
             <tbody>
               {recipes.map((recipe) => (
                 <tr key={recipe.id} className="border-b">
-                  <td className="p-3">{recipe.name}</td>
+                  <td className="p-3">
+                  <Link
+                       href={`/recipes/${recipe.id}`}
+                    className="text-blue-600 hover:underline"
+                    >
+                  {recipe.name}
+                  </Link>
+                    </td>
                   <td className="p-3 text-right">{recipe.yield_count}個</td>
                   <td className="p-3 text-center">
-                    <div className="flex justify-center gap-2">
-                      <Link
-                        href={`/recipes/${recipe.id}`}
-                        className="rounded bg-green-600 px-3 py-1 text-white"
-                      >
-                        配合
-                      </Link>
-
-                      <button
-                        onClick={() => deleteRecipe(recipe.id)}
-                        className="rounded bg-red-600 px-3 py-1 text-white"
-                      >
-                        削除
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => deleteRecipe(recipe.id)}
+                      className="rounded bg-red-600 px-3 py-1 text-white"
+                    >
+                      削除
+                    </button>
                   </td>
                 </tr>
               ))}
